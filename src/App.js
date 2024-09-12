@@ -2,12 +2,14 @@ import react, {useState} from 'react';
 import axios from 'axios';
 import './App.css';
 
+require('dotenv').config();
+
 function App() {
     const [image, setImage] = useState('')
 
     const handleChange = () => {
         axios
-            .get('https://api.generated.photos/api/v1/faces?api_key=S8GHTpwfr-rgO5fkEUnTew&order_by=random')
+            .get(`https://api.generated.photos/api/v1/faces?api_key=${process.env.API_GENERATED_PHOTOS}&order_by=random`)
             .then(res => {
             const url = res.data.faces[0].urls[4][512];
             url && setImage(url);
